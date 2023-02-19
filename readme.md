@@ -3,6 +3,7 @@
 ajaxによる非同期通信についての学習もするべく実装をした.
 また,HTMLなどの練習用としても用いた.
 djangoのdockerによる環境構築を最初に行う.
+
 参考:[https://www.python-izm.com/web/django/django_project/]
 [https://python.keicode.com/django/]
 
