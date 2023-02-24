@@ -13,7 +13,7 @@ requirements.txtには仮想環境にインストールするライブラリを�
 dockerfileにはDockerイメージをビルドして実行するための命令を描く.
 docker-compose.ymlにはアプリケーション実行に必要なコンテナの構造化されたデータを記載する.
 
-参考:[https://qiita.com/mikako0115/items/6be7c40f24d2e6fabddb]
+参考:[https://qiita.com/mikako0115/items/6be7c40f24d2e6fabddb]「VSCode / WSL / DockerでDjangoの環境構築をしてみる【Window10, 11版】」
 [https://zenn.dev/agepan/articles/docker-article-001]
 [https://zenn.dev/masa20210102/articles/48775049baf8c4]
 [https://book-reviews.blog/build-django-mysql-environment-with-docker-compose/]
@@ -25,6 +25,36 @@ docker-compose.ymlにはアプリケーション実行に必要なコンテナ�
 `docker-compose down`
 ***
 
+***
+`docker-compose up -d`
+***
+
+この後にlocalhostに行ければ成功.
+
+## DBの作成
+
+dockerの拡張機能でコンテナを表示.
+***
+`mysql -u root -p`
+***
+でmysqlへログイン.
+***
+`show databases`
+***
+
+dbができていることを確認.
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| django             |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.04 sec)
+
+参考資料:[https://qiita.com/bakupen/items/f23ce3d2325b4491a2dd]
 
 ## プロジェクトの作成方法
 作成したいディレクトリ上で
