@@ -1,11 +1,12 @@
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'chat/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'room/style.css' %}">
 
 <div class="header">
 chat
 </div>
 
+{% comment %} ルーム作成 {% endcomment %}
 <h2>ルームを新しく作成する<h2>
 <div class="create-room-box">
     <form action="/room/" method="post">
@@ -15,6 +16,7 @@ chat
     </form>
 </div>
 
+{% comment %} ルーム一覧 {% endcomment %}
 <h2>ルーム</h2>
 <ul class="select-room-box">
 {% for room in rooms %}
@@ -22,3 +24,9 @@ chat
     <div class="describe">{{room.describe}}</div>
 {% endfor %}
 </ul>
+
+{% comment %} roomの数が0ならば {% endcomment %}
+{% if (room_id)==0 %}
+<h2>ルームを作成しましょう!</h2>
+{% endif %}
+    

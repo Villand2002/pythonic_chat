@@ -1,1 +1,35 @@
 {%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'chat/style.css' %}">
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chatroom</title>
+</head> {% endcomment %}
+
+<body>
+    <header>会話を開始する</header>
+    
+{% for content in contents %}
+    <div class="chat_wrapper">
+        {% comment %} チャットの内容を表示する {% endcomment %}
+        <div class="information">
+            <div class="name">{{user.name}}</div>
+            <div class="timestamp">{{chat.timestamp}}</div>
+        </div>
+        <div class="content">{{chat.content}}</div>
+    </div>
+{% endfor %}
+
+{% comment %} 送信用フォーム {% endcomment %}
+<div class="submit_content">
+    <form action="{{ route. }}" action="post">
+        <div class="submit"><input type="text" placeholder="メッセージを入力"></div>
+        <div class="btn"><button type="submit">送信</button></div>
+    </form>
+</div>
+
+</body>
+</html>
