@@ -182,6 +182,20 @@ def 関数名(request):で定義
 第1引数は受け取ったrequest
 第2引数はテンプレートファイルのパス
 
+## テンプレートの自動補完設定
+
+htmlのようにemmetで補完を可能にするためにsetting.jsonファイルを書き換えて以下の行を追加した.
+
+***
+```js
+"emmet.includeLanguages": {
+    "django-html": "html",
+},
+```
+***
+
+参考:[https://tech-blog.cloud-config.jp/2020-05-20-vscode-emmet-not-html]
+
 ## テンプレートファイルのパスについて
 TEMPLATESで設定したすべてのテンプレートディレクトリー下が一括して扱われる
 テンプレートディレクトリー以下の相対パスとする
@@ -191,6 +205,7 @@ TEMPLATESで設定したすべてのテンプレートディレクトリー下�
 
 
 ## viewの作成
+
 pythonic_ajax/templateにchat_pyディレクトリを設定し,その中にchat.htmlを設定した.
 変数などの利用方法は一部laravelと同様な部分がある.
 変数は{{  }}で囲っておく.

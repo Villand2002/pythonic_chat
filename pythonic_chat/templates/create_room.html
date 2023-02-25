@@ -3,14 +3,14 @@
 <link rel="stylesheet" type="text/css" href="{% static 'chat/style.css' %}">
 
 <div class="header">
-Django - チャットアプリデモ
+chat
 </div>
 
 <h2>ルームを新しく作成する<h2>
 <div class="create-room-box">
     <form action="/room/" method="post">
         {% csrf_token %}
-        <input placeholder="ルーム名を入力" type="text" name="room_name" value="">
+        <input placeholder="ルーム名を指定してください" type="text" name="room_name" value="">
         <input type="submit" class="send" name="button" value="作成"> 
     </form>
 </div>
