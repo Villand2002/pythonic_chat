@@ -327,4 +327,8 @@ chats
 
 ユーザーとchatは1対多のリレーションとする.
 
+参考:[https://brhk.me/programing/django-foreignkey/#toc2]
+
+「Djangoのテーブル間リレーションシップを理解する」
+
 
