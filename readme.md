@@ -13,10 +13,17 @@ requirements.txtには仮想環境にインストールするライブラリを�
 dockerfileにはDockerイメージをビルドして実行するための命令を描く.
 docker-compose.ymlにはアプリケーション実行に必要なコンテナの構造化されたデータを記載する.
 
-参考:[https://qiita.com/mikako0115/items/6be7c40f24d2e6fabddb]「VSCode / WSL / DockerでDjangoの環境構築をしてみる【Window10, 11版】」
+参考:[https://qiita.com/mikako0115/items/6be7c40f24d2e6fabddb]
+「VSCode / WSL / DockerでDjangoの環境構築をしてみる【Window10, 11版】」
+
 [https://zenn.dev/agepan/articles/docker-article-001]
+「DockerでDjango+mysql環境の構築＆プロジェクト作成」
+
 [https://zenn.dev/masa20210102/articles/48775049baf8c4]
+「Docker DesktopでWSLの統合を有効にしているのに「`The command 'docker-compose'～」への対応法」
+
 [https://book-reviews.blog/build-django-mysql-environment-with-docker-compose/]
+「docker-composeでDjango+MySQLの環境を構築する」
 
 その後にプロジェクト作成に移る.
 
