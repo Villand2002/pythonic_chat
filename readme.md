@@ -132,6 +132,7 @@ channels-redis
 具体的には初期状態で以下のようになっている.
 
 ***
+```python
 ├── db.sqlite3
 ├── manage.py
 ├── chat_py(アプリ名)
@@ -148,6 +149,7 @@ channels-redis
     ├── settings.py
     ├── urls.py
     └── wsgi.py
+```
 ***
 プロジェクトとアプリは独立しているので最初に
 
@@ -255,7 +257,8 @@ laravelと同様に,mvcアーキテクチャを使用して開発をする.
 
 ## staticディレクトリ
 js用のディレクトリとcss用のディレクトリはここで管理する.
-
+***
+```python
 ├── db.sqlite3
 ├── manage.py
 ├── chat_py(アプリ名)
@@ -277,6 +280,8 @@ js用のディレクトリとcss用のディレクトリはここで管理する
       |    └── style.css
       └── js
           └── chat.js
+```
+***
 
 のような構成となる.          
 
