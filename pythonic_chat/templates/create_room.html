@@ -6,7 +6,8 @@
 chat
 </div>
 
-{% comment %} ルーム作成 {% endcomment %}
+//ルーム作成
+
 <h2>ルームを新しく作成する<h2>
 <div class="create-room-box">
     <form action="/room/" method="post">
@@ -16,7 +17,8 @@ chat
     </form>
 </div>
 
-{% comment %} ルーム一覧 {% endcomment %}
+//ルーム一覧
+
 <h2>ルーム</h2>
 <ul class="select-room-box">
 {% for room in rooms %}
@@ -25,7 +27,7 @@ chat
 {% endfor %}
 </ul>
 
-{% comment %} roomの数が0ならば {% endcomment %}
+//roomの数が0ならば別メッセージを表示
 {% if (room_id)==0 %}
 <h2>ルームを作成しましょう!</h2>
 {% endif %}

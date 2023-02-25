@@ -295,7 +295,63 @@ js用のディレクトリとcss用のディレクトリはここで管理する
 ***
 
 のような構成となる.          
+staticディレクトリに画像,js,cssなどの静的データを入れる.それをdjango側に認識させるためにsetting.py下の文を追加する．
 
+***
+```python
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Tepmpateフォルダへの絶対パスを定義
+TEMPLATE_DIR = BASE_DIR / "Template"
+
+# staticフォルダへの絶対パスを定義
+STATIC_DIR = BASE_DIR / "static"
+
+```
+***
+
+
+***
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [TEMPLATE_DIR,], #追加
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+***
+
+これでtemplateディレクトリが使えるようになった.
+次にstaticディレクトリを認識させる.
+
+***
+```pyhton
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+STATIC_DIR,
+]
+```
+***
+
+これでload staticが可能になる.
+
+参考:[https://di-acc2.com/programming/python/602/]
+
+「テンプレートの作成・HTML/CSS表示｜PythonによるWebアプリ開発(Template)#4」
 
 ## マイグレーション
 dbのカラムを決めてmysqlでdbを作成した.
