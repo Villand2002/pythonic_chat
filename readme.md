@@ -1,4 +1,4 @@
-## pythonic_chat
+# pythonic_chat
 これはpythonの非同期通信になれるべく作成した練習用アプリ。
 ajaxによる非同期通信についての学習もするべく実装をした.
 また,HTMLなどの練習用としても用いた.
@@ -68,6 +68,46 @@ dbができていることを確認.
 5 rows in set (0.04 sec)
 ```
 参考資料:[https://qiita.com/bakupen/items/f23ce3d2325b4491a2dd]
+
+## modelについて
+
+laravelと同様に,mvcアーキテクチャを使用して開発をする.
+
+
+## マイグレーション
+dbのカラムを決めてmysqlでdbを作成した.
+
+カラムは以下のようにした.
+users
+|  カラム名  |  役割  |
+|  ----  |  ----  |
+|  id |  自動割り振り  |
+|  user  |  ユーザー名  |
+|  password   |  パスワード  |
+|  email  |  メールアドレス  |
+
+rooms
+|  カラム名  |  役割  |
+|  ----  |  ----  |
+|  id |  自動割り振り  |
+|  user  |  ユーザー名  |
+|  room_name  |  ルーム名  |
+|  room_id   |  部屋番号  |
+|  describe   |  部屋の詳細  |
+roomとuserは多対多のリレーションとする.
+
+chats
+|  カラム名  |  役割  |
+|  ----  |  ----  |
+|  content |  chatの内容  |
+|  timestamp  |  作成日時  |
+
+ユーザーとchatは1対多のリレーションとする.
+
+参考:[https://brhk.me/programing/django-foreignkey/#toc2]
+
+「Djangoのテーブル間リレーションシップを理解する」
+
 
 ## プロジェクトの作成方法
 作成したいディレクトリ上で
@@ -178,7 +218,7 @@ from . import views
 urlpatterns = [
     url('', views.index, name='index'),
 ]
-これを pythonic_ajax/urls.py から取り込む.
+これを pythonic_chat/urls.py から取り込む.
 
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -189,84 +229,13 @@ urlpatterns = [
 ]
 ```
 ***
-このように URL の設定丸ごと取り込む仕組みがあるので、 chat_py アプリケーションに関わる URL については、 pythonic_ajax ディレクトリ内の urls.py に直接 URL を記述するのではなく、 chat_pyディレクトリ内の urls.py に記述しておくことができる.
+このように URL の設定丸ごと取り込む仕組みがあるので、 chat_py アプリケーションに関わる URL については、 pythonic_chat ディレクトリ内の urls.py に直接 URL を記述するのではなく、 chat_pyディレクトリ内の urls.py に記述しておくことができる.
 
-## ルーティングについて
-def 関数名(request):で定義
-テンプレートを呼ぶ戻り値はrender関数
-第1引数は受け取ったrequest
-第2引数はテンプレートファイルのパス
-
-## テンプレートの自動補完設定
-
-htmlのようにemmetで補完を可能にするためにsetting.jsonファイルを書き換えて以下の行を追加した.
-
-***
-```js
-"emmet.includeLanguages": {
-    "django-html": "html",
-},
-```
-***
-
-参考:[https://tech-blog.cloud-config.jp/2020-05-20-vscode-emmet-not-html]
-
-## テンプレートファイルのパスについて
-TEMPLATESで設定したすべてのテンプレートディレクトリー下が一括して扱われる
+### テンプレートファイルのパスについて
+TEMPLATES_DIRで設定したすべてのテンプレートディレクトリー下が一括して扱われる
 テンプレートディレクトリー以下の相対パスとする
 
-## viewの作成
-
-pythonic_ajax/templateにchat_pyディレクトリを設定し,その中にchat.htmlを設定した.
-変数などの利用方法は一部laravelと同様な部分がある.
-変数は{{  }}で囲っておく.
-viewの継承も可能である.
-
-例)親テンプレート(共通の見た目)
-***
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
-  <title>index.html</title>
-  <style>
-  body {
-    background-color: #B2EBF2;
-    font-family: sans-serif;
-  }
-  </style>
-</head>
-<body>
-{% block content1 %} 
-
-<!-- blockを定義してcontentという共通パーツを継承できるようにする. -->
-{% endblock %}
-
-</body>
-</html>
-```
-***
-
-子テンプレート(継承される独自のパーツを持つ部分)
-***
-```html
-{% extends "myapp1/base.html" %}
-<!-- extendsを最初に宣言して利用する親テンプレートを継承する. -->
-{% block content1 %}
-<h1>Hello, {{fname}}!</h1>
-
-<!-- contentというblockに変数{{ fname }}を埋め込んでいる. -->
-
-{% endblock %}
-```
-***
-## modelについて
-
-laravelと同様に,mvcアーキテクチャを使用して開発をする.
-
-## staticディレクトリ
+### staticディレクトリ
 js用のディレクトリとcss用のディレクトリはここで管理する.
 ***
 ```python
@@ -294,7 +263,8 @@ js用のディレクトリとcss用のディレクトリはここで管理する
 ```
 ***
 
-のような構成となる.          
+のような構成となる.
+          
 staticディレクトリに画像,js,cssなどの静的データを入れる.それをdjango側に認識させるためにsetting.py下の文を追加する．
 
 ***
@@ -353,38 +323,79 @@ STATIC_DIR,
 
 「テンプレートの作成・HTML/CSS表示｜PythonによるWebアプリ開発(Template)#4」
 
-## マイグレーション
-dbのカラムを決めてmysqlでdbを作成した.
-
-カラムは以下のようにした.
-users
-|  カラム名  |  役割  |
-|  ----  |  ----  |
-|  id |  自動割り振り  |
-|  user  |  ユーザー名  |
-|  password   |  パスワード  |
-|  email  |  メールアドレス  |
-
-rooms
-|  カラム名  |  役割  |
-|  ----  |  ----  |
-|  id |  自動割り振り  |
-|  user  |  ユーザー名  |
-|  room_name  |  ルーム名  |
-|  room_id   |  部屋番号  |
-|  describe   |  部屋の詳細  |
-roomとuserは多対多のリレーションとする.
-
-chats
-|  カラム名  |  役割  |
-|  ----  |  ----  |
-|  content |  chatの内容  |
-|  timestamp  |  作成日時  |
-
-ユーザーとchatは1対多のリレーションとする.
-
-参考:[https://brhk.me/programing/django-foreignkey/#toc2]
-
-「Djangoのテーブル間リレーションシップを理解する」
 
 
+
+
+
+
+
+## ルーティングについて
+def 関数名(request):で定義
+テンプレートを呼ぶ戻り値はrender関数
+第1引数は受け取ったrequest
+第2引数はテンプレートファイルのパス
+
+## テンプレートの自動補完設定
+
+htmlのようにemmetで補完を可能にするためにsetting.jsonファイルを書き換えて以下の行を追加した.
+
+***
+```js
+"emmet.includeLanguages": {
+    "django-html": "html",
+},
+```
+***
+
+djangoでのhtmlファイルでemmetを用いるという意味である.
+
+参考:[https://tech-blog.cloud-config.jp/2020-05-20-vscode-emmet-not-html]
+
+## viewの作成
+
+pythonic_ajax/templateにchat_pyディレクトリを設定し,その中にchat.htmlを設定した.
+変数などの利用方法は一部laravelと同様な部分がある.
+変数は{{  }}で囲っておく.
+viewの継承も可能である.
+
+例)親テンプレート(共通の見た目)
+***
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>index.html</title>
+  <style>
+  body {
+    background-color: #B2EBF2;
+    font-family: sans-serif;
+  }
+  </style>
+</head>
+<body>
+{% block content1 %} 
+
+<!-- blockを定義してcontentという共通パーツを継承できるようにする. -->
+{% endblock %}
+
+</body>
+</html>
+```
+***
+
+子テンプレート(継承される独自のパーツを持つ部分)
+***
+```html
+{% extends "myapp1/base.html" %}
+<!-- extendsを最初に宣言して利用する親テンプレートを継承する. -->
+{% block content1 %}
+<h1>Hello, {{fname}}!</h1>
+
+<!-- contentというblockに変数{{ fname }}を埋め込んでいる. -->
+
+{% endblock %}
+```
+***
