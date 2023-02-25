@@ -283,7 +283,7 @@ js用のディレクトリとcss用のディレクトリはここで管理する
 dbのカラムを決めてmysqlでdbを作成した.
 
 カラムは以下のようにした.
-user
+users
 |  カラム名  |  役割  |
 |  ----  |  ----  |
 |  id |  自動割り振り  |
@@ -291,15 +291,17 @@ user
 |  password   |  パスワード  |
 |  email  |  メールアドレス  |
 
-room
+rooms
 |  カラム名  |  役割  |
 |  ----  |  ----  |
 |  id |  自動割り振り  |
 |  user  |  ユーザー名  |
+|  room_name  |  ルーム名  |
 |  room_id   |  部屋番号  |
+|  describe   |  部屋の詳細  |
 roomとuserは多対多のリレーションとする.
 
-chat
+chats
 |  カラム名  |  役割  |
 |  ----  |  ----  |
 |  content |  chatの内容  |

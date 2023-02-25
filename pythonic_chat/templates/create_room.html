@@ -15,9 +15,10 @@ chat
     </form>
 </div>
 
-<h2>ルーム一覧</h2>
+<h2>ルーム</h2>
 <ul class="select-room-box">
-{% for room in room_list %}
-    <a href="/chat/{{ room.name }}">{{ room.name }}</a>
+{% for room in rooms %}
+    <a href="/chat/{{ room.room_name }}">{{ room.room_name }}</a>
+    <div class="describe">{{room.describe}}</div>
 {% endfor %}
 </ul>
