@@ -37,9 +37,9 @@ docker-compose.ymlにはアプリケーション実行に必要なコンテナ�
 ***
 
 ***
-`docker-compose up -d`
+`docker-compose up `
 ***
-
+2/27追記:この時に-dはなしにする.
 この後にlocalhostに行ければ成功.
 
 ## DBの作成
