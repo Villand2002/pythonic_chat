@@ -76,13 +76,19 @@ laravelと同様に,mvcアーキテクチャを使用して開発をする.
 
 ## マイグレーション
 dbのカラムを決めてmysqlでdbを作成した.
+***
+```python
+docker-compose run --rm web python3 manage.py migrate
+```
+***
+
+を用いてmigrationを実行.
 
 カラムは以下のようにした.
 users
 |  カラム名  |  役割  |
 |  ----  |  ----  |
 |  id |  自動割り振り  |
-|  user  |  ユーザー名  |
 |  password   |  パスワード  |
 |  email  |  メールアドレス  |
 
@@ -99,7 +105,9 @@ roomとuserは多対多のリレーションとする.
 chats
 |  カラム名  |  役割  |
 |  ----  |  ----  |
+|  id |  自動割り振り  |
 |  content |  chatの内容  |
+|  user  |  ユーザー名  |
 |  timestamp  |  作成日時  |
 
 ユーザーとchatは1対多のリレーションとする.
@@ -107,6 +115,23 @@ chats
 参考:[https://brhk.me/programing/django-foreignkey/#toc2]
 
 「Djangoのテーブル間リレーションシップを理解する」
+
+## ルーティングについて
+
+### 表示用のルーティング設定
+/ ルート
+ルーム作成する所、既存のルーム一覧も表示される
+/chat/{ルーム名}
+ルーム内、チャットを表示していく所  
+/room/{ルーム名}
+ルームの作成処理
+
+参考:[https://office54.net/python/django/urls-path-include#section1-4]
+
+### Websocketで繋いでいくとこの設定
+/ws/{ルーム名}/{個人ID}
+ルーム毎に個人IDを割り振っていきます。
+
 
 
 ## プロジェクトの作成方法

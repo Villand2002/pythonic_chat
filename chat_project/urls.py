@@ -14,8 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 
+app_name = 'pythonic_chat'
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('',include('chat.urls', name='chat'))
+    # nameでurl指定の時の名前をしてする.laravelでいう->name(chat.index)と同じ.
 ]
